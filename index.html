@@ -9,6 +9,52 @@
 			font-family: digit;
 			src: url('digital.ttf') format("truetype");
 		}
+		.container {
+			float: left;
+			/* margin: 50px auto; */
+			width: 670px;
+			height: 750px;
+			/* overflow: hidden;
+			border: 10px solid;
+			border-top-color: #856036;
+			border-left-color: #5d4426;
+			border-bottom-color: #856036;
+			border-right-color: #5d4426; */
+			position: relative;
+		}
+
+		.photo {
+			position: absolute;
+			/*这里时间比下面最大时间多一轮的时间*/
+			animation: round 40s infinite; 
+			opacity: 0;
+			width: 670px;
+			height: 620px;
+		}
+
+		@keyframes round {
+		25% {
+			opacity: 1;
+		}
+		40% {
+			opacity: 0;
+		}
+		}
+		img:nth-child(1) {
+		animation-delay: 0s;
+		}
+
+		img:nth-child(2) {
+		animation-delay: 10s;
+		}
+
+		img:nth-child(3) {
+		animation-delay: 20s;
+		}
+
+		img:nth-child(4) {
+		animation-delay: 30s;
+		}
 	</style>
 	<link href="css/default.css" type="text/css" rel="stylesheet">
 	<script type="text/javascript" src="js/jquery.js"></script>
@@ -58,6 +104,12 @@
 			i.live_happily_forever_with(u)<br/>
 			<span class="comments"># I love you forever.</span><br/>
 		</div>
+		<div class="container">
+			<img class='photo'  src="images/8562729616_35b1384aa1.jpg" alt="" />
+			<img class='photo'  src="images/8113424031_72048dd887.jpg" alt="" />
+			<img class='photo'  src="images/8562523343_9bb49b7b7b.jpg" alt="" />
+			<img class='photo'  src="images/123.jpg" alt="" />
+		</div>
 		<div id="loveHeart">
 			<canvas id="garden"></canvas>
 			<div id="words">
@@ -72,11 +124,12 @@
 			</div>
 		</div>
 	</div>
-	<div id="copyright">
+	<!-- <div id="copyright">
 		Copyright © 2020 <a href='http://cuiqingcai.com'>cuiqingcai.com</a> 2014-2020
-	</div>
+	</div> -->
 </div>
 <script type="text/javascript">
+    $("#loveHeart").hide();
 	var offsetX = $("#loveHeart").width() / 2;
 	var offsetY = $("#loveHeart").height() / 2 - 55;
 	var together = new Date();
@@ -98,8 +151,10 @@
 		document.execCommand("stop");
 	} else {
 		setTimeout(function () {
+			$("#loveHeart").show();
+			$(".container").hide();
 			startHeartAnimation();
-		}, 5000);
+		}, 30000);
 
 		timeElapse(together);
 		setInterval(function () {
