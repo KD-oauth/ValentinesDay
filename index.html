@@ -9,57 +9,65 @@
 			font-family: digit;
 			src: url('digital.ttf') format("truetype");
 		}
-		.container {
-			float: left;
-			/* margin: 50px auto; */
-			width: 670px;
-			height: 750px;
-			/* overflow: hidden;
-			border: 10px solid;
-			border-top-color: #856036;
-			border-left-color: #5d4426;
-			border-bottom-color: #856036;
-			border-right-color: #5d4426; */
-			position: relative;
-		}
-
-		.photo {
-			position: absolute;
-			/*这里时间比下面最大时间多一轮的时间*/
-			animation: round 40s infinite; 
-			opacity: 0;
-			width: 670px;
-			height: 620px;
-		}
-
-		@keyframes round {
-		25% {
-			opacity: 1;
-		}
-		40% {
-			opacity: 0;
-		}
-		}
-		img:nth-child(1) {
-		animation-delay: 0s;
-		}
-
-		img:nth-child(2) {
-		animation-delay: 10s;
-		}
-
-		img:nth-child(3) {
-		animation-delay: 20s;
-		}
-
-		img:nth-child(4) {
-		animation-delay: 30s;
-		}
+		/* 按钮样式 */
+		a {
+            position: relative;
+            width: 100px;
+            height: 60px;
+            text-align: center;
+            line-height: 60px;
+            margin: 45px;
+            text-decoration: none;
+            color: #308080;
+            font-size: 20px;
+            padding: 0 20px;
+            text-transform: uppercase;
+            transition: 0.5s;
+            overflow: hidden;
+			-webkit-box-reflect: below 1px linear-gradient(transparent, #1113);
+        }
+        a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 20px;
+            height: 20px;
+            border-top: 2px solid #308080;
+            border-left: 2px solid #308080;
+            transition: 0.5s;
+            transition-delay: 0.5s;
+        }
+        a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 20px;
+            height: 20px;
+            border-bottom: 2px solid #308080;
+            border-right: 2px solid #308080;
+            transition: 0.5s;
+            transition-delay: 0.5s;
+        }
+        a:hover::before, a:hover::after {
+            width: 100%;
+            height: 100%;
+            transition-delay: 0s;
+        }
+        a:hover {
+            background-color: #308080;
+            color: #000;
+            box-shadow: 0 0 50px x#308080;
+            transition-delay: 0.3s;
+        }
 	</style>
 	<link href="css/default.css" type="text/css" rel="stylesheet">
-	<script type="text/javascript" src="js/jquery.js"></script>
+	<link rel="stylesheet" href="css/just-tip.css">
+	<script src="http://www.jq22.com/jquery/1.9.1/jquery.min.js"></script>
 	<script type="text/javascript" src="js/garden.js"></script>
 	<script type="text/javascript" src="js/functions.js"></script>
+	<script src="js/justTools.js"></script>
 </head>
 
 <body>
@@ -70,76 +78,113 @@
 			<span class="comments"># I am a programmer,</span><br/>
 			<span class="comments"># so I write code to celebrate Valentine's Day in coder's way.</span><br/>
 			<span class="comments">##</span><br/>
-			i = Boy(<span class="string">"Qingcai Cui"</span>);<br/>
-			u = Girl(<span class="string">"Qian Ma"</span>);<br/>
-			<span class="comments"># Oct 14, 2018, I meet you because of PyCon 2018. </span><br/>
+			i = Boy(<span class="string">"Bingquan Qu"</span>);<br/>
+			u = Girl(<span class="string">"Jingru Yang"</span>);<br/>
+			we = {u, i} <br/>
+			<span class="comments"># Nov 14, 2020, the first time I meet you. </span><br/>
 			i.meet(u)<br/>
-			<span class="comments"># Afterwards, I confessed to you. </span><br/>
-			i.confess(u)<br/>
-			<span class="comments"># Nov 5, 2018, You became my girlfriend.</span><br/>
-			u.accepted(i)<br/>
-			<span class="comments"># Since then, we spent harmony happiness life every day.</span><br/>
+			<span class="comments"># Nov 16, 2020, the first time we chat in WeChat. </span><br/>
+			chat(u, i, Chat.WECHAT)<br/>
+			<span class="comments"># Nov 21, 2020, the first time we play game. </span><br/>
+			play(u, i, Game.HONOR_OF_KINGS)<br/>
+			<span class="comments"># <span id="tips3">Since then</span>, we spent harmony happiness life every day.</span><br/>
 			happy(u, i)<br/>
 			<span class="comments"># We enjoy studying together.</span><br/>
 			study(u, i)<br/>
 			<span class="comments"># We enjoy cuisine together.</span><br/>
 			dine(u, i)<br/>
-			<span class="comments"># We enjoy appointment together.</span><br/>
-			appoint(u, i)<br/>
-			<span class="comments"># We enjoy vacation together.</span><br/>
-			vacation(u, i)<br/>
+			<span class="comments"># We enjoy travel together.</span><br/>
+			travel(u, i)<br/>
 			<span class="comments"># Sometimes there are a few conflicts between us.</span><br/>
 			conflict(u, i, sometimes=<span class="keyword">True</span>)<br/>
 			<span class="comments"># But we are getting more and more in harmony together.</span><br/>
 			u.in_harmony_with(i) <br/>
 			i.in_harmony_with(u) <br/>
 			<span class="comments"># You are the greatest love of my life.</span><br/>
-			while <span class="keyword">True</span>:<br/>
+			<span id="tips4">while <span class="keyword">True</span></span>:<br/>
 			<span class="placeholder"></span><span class="keyword">if</span> u.with(i):<br/>
 			<span class="placeholder"></span><span class="placeholder"></span>u = everything<br/>
 			<span class="placeholder"></span><span class="keyword">else</span>:<br/>
 			<span class="placeholder"></span><span class="placeholder"></span>everything = u<br/>
-			<span class="comments"># Waiting me marries you, we will be the happiest couple in the world.</span><br/>
-			i.marry(u, in_the_future=<span class="keyword">True</span>)<br/>
-			i.live_happily_forever_with(u)<br/>
-			<span class="comments"># I love you forever.</span><br/>
-		</div>
-		<div class="container">
-			<img class='photo'  src="images/8562729616_35b1384aa1.jpg" alt="" />
-			<img class='photo'  src="images/8113424031_72048dd887.jpg" alt="" />
-			<img class='photo'  src="images/8562523343_9bb49b7b7b.jpg" alt="" />
-			<img class='photo'  src="images/123.jpg" alt="" />
+			<span class="comments"># Though Many difficulties lie in front of us.</span><br/>
+			difficulties = troubleFactory.build()<br/>
+			<span class="comments"># Believe we can break them.</span><br/>
+			we.destroy(difficulties) <br/>
+			<span class="comments"># Yang, I love you forever.</span><br/>
 		</div>
 		<div id="loveHeart">
 			<canvas id="garden"></canvas>
 			<div id="words">
 				<div id="messages">
-					Qian, I have fallen in love with you for
+					<Span id="tips2">Yang</Span>, I have fallen in love with you for
 					<div id="elapseClock"></div>
 				</div>
 				<div id="loveu">
 					Love u forever and ever.<br/>
-					<div class="signature">- Qingcai Cui | Germey</div>
+					<div class="signature">- KD</div>
 				</div>
 			</div>
 		</div>
-	</div>
+	</div>	
+	<div style="text-align: center;" id="but" hidden><a id="tips1" href="#">Click Here to find the reward</a></div>
 	<!-- <div id="copyright">
 		Copyright © 2020 <a href='http://cuiqingcai.com'>cuiqingcai.com</a> 2014-2020
 	</div> -->
 </div>
 <script type="text/javascript">
-    $("#loveHeart").hide();
 	var offsetX = $("#loveHeart").width() / 2;
 	var offsetY = $("#loveHeart").height() / 2 - 55;
 	var together = new Date();
 	// 此处月份介于 0 ~ 11 之间。用本地时间表示，如 8 月要用 7 表示。
-	together.setFullYear(2018, 10, 5);
+	together.setFullYear(2020, 10, 14);
 	together.setHours(15);
 	together.setMinutes(0);
 	together.setSeconds(0);
 	together.setMilliseconds(0);
+	console.log("%c能找到这里好厉害，奖励糯糯羊红包一枚～支付宝口令红包：%c92778077" ,  "color:#AA00FF","color:pink");
+	$("#tips1").click(function(){
+		var _this = $(this);
+		_this.justToolsTip({
+	        animation:"moveInTop",
+	        width:"300px",
+			contents:"Please find the next tip in this page. <br><hr> @ Hint -> The tiny girl in my heart.",
+	        gravity:'top'
+	    });
+	})
 
+	$("#tips2").mouseover(function(){
+		var _this = $(this);
+		_this.justToolsTip({
+	        animation:"moveInTop",
+	        width:"300px",
+			contents:"Tiny means small and cute. <br><hr> That was my first impression of you. <br><hr> Since then, I can't forget you. <br><hr> @ Hint -> the opposite of 'Until then'.",
+	        gravity:'top'
+	    });
+	})
+
+	setTimeout(function () {
+		$("#tips3").mouseover(function(){
+			var _this = $(this);
+			_this.justToolsTip({
+				animation:"moveInTop",
+				width:"300px",
+				contents:"Until then, I've never cared so much for anyone. <br><hr> Of course, It's the first time I've been to someone with my heart. <br><hr> You know, you are the first, and hopefully, the last. <br><hr> @ Hint -> Where is the code which would execute forever?",
+				gravity:'top'
+			});
+		})
+
+		$("#tips4").mouseover(function(){
+			var _this = $(this);
+			_this.justToolsTip({
+				animation:"moveInTop",
+				width:"300px",
+				contents:"I‘m convinced that if you want to do something well,you should put your heart on it. <br><hr> This is true of everything. <br><hr> Including study, work and you. <br><hr> I think of our relationship as a lifetime's work. <br><hr> It will be the same in a few decades. <br><hr> @ Hint -> In Harbin we debugged the project together.Where do we print out the console.log()?",
+				gravity:'top'
+			});
+		})
+			$("#but").show();
+		 }, 120000);
+	
 	if (!document.createElement('canvas').getContext) {
 		var msg = document.createElement("div");
 		msg.id = "errorMsg";
@@ -151,10 +196,8 @@
 		document.execCommand("stop");
 	} else {
 		setTimeout(function () {
-			$("#loveHeart").show();
-			$(".container").hide();
 			startHeartAnimation();
-		}, 30000);
+		}, 8000);
 
 		timeElapse(together);
 		setInterval(function () {
